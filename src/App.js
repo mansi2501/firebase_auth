@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/layout/Navbar";
+import { Switch, Route } from "react-router";
+import Userdata from "./components/UserData/UserData";
+import Userdetail from "./components/UserData/UserDetail";
+import Userform from "./components/UserData/UserForm";
+import Login from "./components/pages/Login";
+import PrivateRoute from "./components/routes/PrivateRoute";
+import "./styles/App.scss";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PrivateRoute component={Navbar} />
+      <Switch>
+        <PrivateRoute exact path="/" component={Userdata} />
+        <PrivateRoute exact path="/userdetail/:id" component={Userdetail} />
+        <PrivateRoute exact path="/userform/:id?" component={Userform} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
     </div>
   );
 }
